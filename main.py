@@ -1,6 +1,8 @@
+basic.show_icon(IconNames.HEART)
+
 def A空転():
-        pins.analog_write_pin(AnalogPin.P13, 0)
-        pins.analog_write_pin(AnalogPin.P14, 0)
+    pins.analog_write_pin(AnalogPin.P13, 0)
+    pins.analog_write_pin(AnalogPin.P14, 0)
 def A逆転():
     pins.analog_write_pin(AnalogPin.P13, 0)
     pins.analog_write_pin(AnalogPin.P14, 1023)
@@ -26,15 +28,15 @@ def Bブレーキ():
 
 def 前進():
     A正転()
-    B正転()
+    B逆転()
 def 後進():
     A逆転()
-    B逆転()
+    B正転()
 def 左回り():
     Aブレーキ()
     B正転()
 def 右回り():
-    A正転()
+    A逆転()
     Bブレーキ()
 def ブレーキ():
     Aブレーキ()
@@ -44,6 +46,7 @@ def 空転():
     B空転()
 
 def on_button_pressed_a():
+    basic.show_icon(IconNames.DUCK)
     前進()
     basic.pause(1000)
     空転()
@@ -58,6 +61,7 @@ def on_button_pressed_a():
     basic.pause(1000)
     ブレーキ()
     basic.pause(1000)
+    basic.show_icon(IconNames.EIGHTH_NOTE)
 
 input.on_button_pressed(Button.A, on_button_pressed_a)
 

@@ -1,3 +1,4 @@
+basic.showIcon(IconNames.Heart)
 function A空転() {
     pins.analogWritePin(AnalogPin.P13, 0)
     pins.analogWritePin(AnalogPin.P14, 0)
@@ -40,12 +41,12 @@ function Bブレーキ() {
 
 function 前進() {
     A正転()
-    B正転()
+    B逆転()
 }
 
 function 後進() {
     A逆転()
-    B逆転()
+    B正転()
 }
 
 function 左回り() {
@@ -54,7 +55,7 @@ function 左回り() {
 }
 
 function 右回り() {
-    A正転()
+    A逆転()
     Bブレーキ()
 }
 
@@ -69,6 +70,7 @@ function 空転() {
 }
 
 input.onButtonPressed(Button.A, function on_button_pressed_a() {
+    basic.showIcon(IconNames.Duck)
     前進()
     basic.pause(1000)
     空転()
@@ -83,6 +85,7 @@ input.onButtonPressed(Button.A, function on_button_pressed_a() {
     basic.pause(1000)
     ブレーキ()
     basic.pause(1000)
+    basic.showIcon(IconNames.EighthNote)
 })
 basic.forever(function on_forever() {
     
