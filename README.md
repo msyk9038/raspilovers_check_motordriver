@@ -1,24 +1,99 @@
+# 小学生向けのロボットの足（クローラ）を動かす
 
-> このページを開く [https://msyk9038.github.io/raspilovers_check_motordriver/](https://msyk9038.github.io/raspilovers_check_motordriver/)
+このプロジェクトは、小学生向けのロボット教育の一環として、Raspberry Piを使用してモータードライバを制御し、クローラ（キャタピラ）を動かすためのコードとドキュメントを提供します。
 
-## 拡張機能として使用
+## 概要
 
-このリポジトリは、MakeCode で **拡張機能** として追加できます。
+Raspberry Piとモータードライバを使用して、DCモーターで駆動するクローラ（キャタピラ）を制御する方法を学ぶための教材です。小学生でも理解しやすいように、シンプルなコードと詳細な解説を提供しています。
 
-* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
-* **新しいプロジェクト** をクリックしてください
-* ギアボタンメニューの中にある **拡張機能** をクリックしてください
-* **https://github.com/msyk9038/raspilovers_check_motordriver** を検索してインポートします。
+## 機能
 
-## このプロジェクトを編集します
+- 前進・後退・左右旋回の基本動作
+- モーターの速度制御
+- ボタンやキーボードによる操作
+- 自動走行モード
+- 障害物検知（オプション）
 
-MakeCode でこのリポジトリを編集します。
+## 必要なハードウェア
 
-* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
-* **読み込む** をクリックし、 **URLから読み込む...** をクリックしてください
-* **https://github.com/msyk9038/raspilovers_check_motordriver** を貼り付けてインポートをクリックしてください
+- Raspberry Pi（3B+または4推奨）
+- モータードライバ（L298Nなど）
+- DCモーター（2個）
+- クローラ（キャタピラ）キット
+- 電源（モーター用とRaspberry Pi用）
+- ジャンパーワイヤー
+- ブレッドボード（必要に応じて）
 
-#### メタデータ (検索、レンダリングに使用)
+## 配線図
 
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+```
+Raspberry Pi    モータードライバ(L298N)    モーター
+-------------------------------------------------
+GPIO 17  -----> IN1              ---->    モーターA
+GPIO 18  -----> IN2              ---->    モーターA
+GPIO 22  -----> IN3              ---->    モーターB
+GPIO 23  -----> IN4              ---->    モーターB
+GPIO 12  -----> ENA (PWM)        ---->    モーターA速度制御
+GPIO 13  -----> ENB (PWM)        ---->    モーターB速度制御
+GND      -----> GND              ---->    共通GND
+```
+
+## セットアップ手順
+
+1. Raspberry Piのセットアップ
+   - Raspberry Pi OSをインストール
+   - 必要なライブラリをインストール
+
+2. 配線
+   - 上記の配線図に従って接続
+
+3. コードのインストール
+   ```bash
+   git clone https://github.com/msyk9038/raspilovers_check_motordriver.git
+   cd raspilovers_check_motordriver
+   ```
+
+4. 実行
+   ```bash
+   python3 motor_control.py
+   ```
+
+## 使用方法
+
+### キーボード操作モード
+- W: 前進
+- S: 後退
+- A: 左旋回
+- D: 右旋回
+- スペース: 停止
+- Q: 終了
+
+### 自動走行モード
+- プログラム内の`auto_mode()`関数を編集して、独自の走行パターンを作成できます
+
+## 教育用資料
+
+- `docs/` フォルダには、小学生向けの解説資料が含まれています
+- モーターの仕組みやプログラミングの基礎についての説明
+- ワークシートと課題
+
+## トラブルシューティング
+
+- モーターが動かない場合は、配線と電源を確認
+- モーターの回転方向が逆の場合は、コード内の`forward()`と`backward()`関数を修正
+- Raspberry Piが起動しない場合は、電源容量を確認
+
+## 発展課題
+
+- 障害物センサーを追加して自動停止機能を実装
+- リモコン操作の追加
+- Webインターフェースからの制御
+- カメラを追加して映像を確認しながら操作
+
+## ライセンス
+
+MIT
+
+## 作者
+
+msyk9038
